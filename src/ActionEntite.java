@@ -11,17 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.afpa59.gc.services.commun.ObjetInexistantException;
 import com.afpa59.gc.services.commun.ServiceArticle;
+import com.afpa59.gc.services.commun.ServiceClient;
+import com.afpa59.gc.services.commun.ServiceEntite;
 
 /**
  * Servlet implementation class DeleteArticle
  */
-public class ActionArticle extends HttpServlet {
+public class ActionEntite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ActionArticle() {
+    public ActionEntite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,35 +37,51 @@ public class ActionArticle extends HttpServlet {
 		String idStr = request.getParameter("id");
 		int id = Integer.parseInt(idStr);
 		String action = request.getParameter("action");
+		String entite = request.getParameter("entite");
 		
+		
+		ServiceEntite se ;
+		
+		switch (entite) {
+		case "article":
+			se = ServiceArticle.getInstance();
+			break;
+		case "client":
+			se = ServiceClient.getInstance();
+			break;
+
+		default:
+			se = null;
+			break;
+		}
+		
+		
+		entite = entite.substring(0, 1).toUpperCase()+entite.substring(1);
 		try{
 			switch (action) {
 			
 				case "visualiser":
-					request.setAttribute("article", ServiceArticle.getInstance().rechercherParId(id));
-					request.setAttribute("action", action);
-					target = "unArticle.jsp";
-					break;
 				case "modifier":
-					request.setAttribute("article", ServiceArticle.getInstance().rechercherParId(id));
+					request.setAttribute("entite", se.rechercherParId(id));
 					request.setAttribute("action", action);
-					target = "unArticle.jsp";
+					target = "un"+entite+".jsp";
 					break;
 				case "supprimer":
 					try{
 						ServiceArticle.getInstance().supprimer(id);
+						request.setAttribute("success", "L'article a bien été supprimé.");
 					}catch (PersistenceException e) {
 						System.out.println(e.getMessage());
-						request.setAttribute("errors", "L'article est référencé ailleurs, vous ne pouvez pas le supprimer.");
+						request.setAttribute("errors", "L'objet est référencé ailleurs, vous ne pouvez pas le supprimer.");
 					}
-					target = "article.jsp";
+					target = entite+".jsp";
 					break;
 				default:
 					break;
 			}
 		}catch(ObjetInexistantException e){
 			System.out.println(e.getMessage());
-			target = "article.jsp";
+			target = entite+".jsp";
 		}
 		
 		

@@ -9,16 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>ValidForm</display-name>
-    <servlet-name>ValidForm</servlet-name>
-    <servlet-class>ValidForm</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ValidForm</servlet-name>
-    <url-pattern>/ValidForm</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <description></description>
     <display-name>SearchForm</display-name>
@@ -31,13 +22,23 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ActionArticle</display-name>
-    <servlet-name>ActionArticle</servlet-name>
-    <servlet-class>ActionArticle</servlet-class>
+    <display-name>SearchClientForm</display-name>
+    <servlet-name>SearchClientForm</servlet-name>
+    <servlet-class>SearchClientForm</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ActionArticle</servlet-name>
-    <url-pattern>/ActionArticle</url-pattern>
+    <servlet-name>SearchClientForm</servlet-name>
+    <url-pattern>/SearchClientForm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActionEntite</display-name>
+    <servlet-name>ActionEntite</servlet-name>
+    <servlet-class>ActionEntite</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionEntite</servlet-name>
+    <url-pattern>/ActionEntite</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -49,16 +50,7 @@
     <servlet-name>Dispatcher</servlet-name>
     <url-pattern>/Dispatcher</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ServletActionArticle</display-name>
-    <servlet-name>ServletActionArticle</servlet-name>
-    <servlet-class>ServletActionArticle</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ServletActionArticle</servlet-name>
-    <url-pattern>/ServletActionArticle</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <description></description>
     <display-name>ArticleForm</display-name>
@@ -68,5 +60,15 @@
   <servlet-mapping>
     <servlet-name>ArticleForm</servlet-name>
     <url-pattern>/ArticleForm</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>ClientForm</display-name>
+    <servlet-name>ClientForm</servlet-name>
+    <servlet-class>ClientForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ClientForm</servlet-name>
+    <url-pattern>/ClientForm</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -7,9 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.afpa59.gc.services.commun.ServiceArticle;
+import com.afpa59.gc.services.commun.ServiceClient;
+import com.afpa59.gc.services.commun.ServiceEntite;
 
 /**
  * Servlet implementation class Dispatcher
@@ -28,37 +29,53 @@ public class Dispatcher extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServiceArticle sa = ServiceArticle.getInstance();
-		
-		
+		ServiceEntite se;
+
 		String action = request.getParameter("action");
+		String entite = request.getParameter("entite");
+		
+		switch (entite) {
+			case "article":
+				se= ServiceArticle.getInstance();
+				break;
+			case "client":
+				se= ServiceClient.getInstance();
+				break;
+			default:
+				se = null;
+				break;
+		}
+		
+		entite = entite.substring(0, 1).toUpperCase()+entite.substring(1); //simule l'ucfirst
+				
 		String target;
 		
 		switch (action) {
 			case "creer":
-				target = "unArticle.jsp";
+				target = "un"+entite+".jsp";
 				break;
 			case "liste":
-				target = "listeArticles.jsp";
-				request.setAttribute("articles", sa.getEntites());
+				target = "liste"+entite+".jsp";
+				request.setAttribute("entites", se.getEntites());
 				break;
 			case "visualiser":
-				target = "rechercherArticle.jsp";
+				target = "rechercher"+entite+".jsp";
 				break;
 			case "modifier":
-				target = "rechercherArticle.jsp";
+				target = "rechercher"+entite+".jsp";
 				break;
 			case "supprimer":
-				target = "rechercherArticle.jsp";
+				target = "rechercher"+entite+".jsp";
 				break;
 			default:
-				target="article.jsp";
+				target=entite+".jsp";
 				break;
 		}
 		
 		request.setAttribute("action", action);
 		
 		RequestDispatcher rd = request.getRequestDispatcher(target);
+		
 		rd.forward(request, response);
 	}
 

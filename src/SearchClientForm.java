@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.afpa59.gc.donnees.Article;
+import com.afpa59.gc.donnees.Client;
 import com.afpa59.gc.donnees.Entite;
 import com.afpa59.gc.services.commun.ObjetInexistantException;
-import com.afpa59.gc.services.commun.ServiceArticle;
+import com.afpa59.gc.services.commun.ServiceClient;
 
 /**
  * Servlet implementation class SearchForm
  */
-public class SearchForm extends HttpServlet {
+public class SearchClientForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchForm() {
+    public SearchClientForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,14 +45,14 @@ public class SearchForm extends HttpServlet {
 		String target = null;
 		
 		String idStr = request.getParameter("id").trim();
-		String libelle = request.getParameter("libelle").trim();
+		String nom = request.getParameter("nom").trim();
 		String action = request.getParameter("action");
 		
 		int id = 0;
-		if(libelle.trim().equals("") && idStr.trim().equals("")){
+		if(nom.trim().equals("") && idStr.trim().equals("")){
 			errors++;
 			request.setAttribute("errorChamps", "Vous devez remplir au moins un des deux champs.");
-		} else if(!libelle.trim().equals("") && !idStr.trim().equals("")){
+		} else if(!nom.trim().equals("") && !idStr.trim().equals("")){
 			errors++;
 			request.setAttribute("errorChamps", "Vous ne devez remplir qu'un seul champs.");
 		}else if(!idStr.trim().equals("") && !idStr.matches("^[-+]?\\d+(\\.\\d+)?$")){
@@ -61,29 +61,30 @@ public class SearchForm extends HttpServlet {
 		}
 		if(errors==0){
 			try {
-				List<Entite> articles = new ArrayList<Entite>();
+				List<Entite> clients = new ArrayList<Entite>();
 				if (!idStr.trim().equals("")){
 					
 					id = Integer.parseInt(idStr);
-					Article article = (Article) ServiceArticle.getInstance().rechercherParId(id);
-					articles.add(article);
-					request.setAttribute("entites", articles);
+					Client client = (Client) ServiceClient.getInstance().rechercherParId(id);
+					clients.add(client);
+					request.setAttribute("entites", clients);
 					
-				}else if(!libelle.trim().equals("")){
-					articles = ServiceArticle.getInstance().rechercherParLibelle(libelle);
-					request.setAttribute("entites", articles);
+				}else if(!nom.trim().equals("")){
+					clients = ServiceClient.getInstance().rechercherParNom(nom);
+					
+					request.setAttribute("entites", clients);
 					
 				}
-				target = "listeArticle.jsp";
+				target = "listeClient.jsp";
 				request.setAttribute("action", action);
 			} catch (ObjetInexistantException e) {
-				target = "rechercherArticle.jsp?action="+action;
+				target = "rechercherClient.jsp?action="+action;
 				request.setAttribute("erreurs", "La recherche n'a retourné aucun résultat");
 			}
 			
 		}else{
-			target = "rechercherArticle.jsp?action="+action;
-			request.setAttribute("libelle", libelle);
+			target = "rechercherClient.jsp?action="+action;
+			request.setAttribute("libelle", nom);
 			request.setAttribute("id", idStr);
 		}
 		
