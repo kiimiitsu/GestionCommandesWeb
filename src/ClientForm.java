@@ -99,7 +99,7 @@ public class ClientForm extends HttpServlet {
 			request.setAttribute("action", action);
 		}
 		request.setAttribute("action", action);
-		target = "unClient.jsp";
+		target = "formClient.jsp";
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(target);

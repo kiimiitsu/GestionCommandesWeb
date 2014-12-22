@@ -18,13 +18,13 @@ import com.afpa59.gc.services.commun.ServiceArticle;
 /**
  * Servlet implementation class SearchForm
  */
-public class SearchForm extends HttpServlet {
+public class SearchArticleForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchForm() {
+    public SearchArticleForm() {
         super();
         // TODO Auto-generated constructor stub
     }

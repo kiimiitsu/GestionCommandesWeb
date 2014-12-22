@@ -49,14 +49,13 @@ public class ActionEntite extends HttpServlet {
 		case "client":
 			se = ServiceClient.getInstance();
 			break;
-
 		default:
 			se = null;
 			break;
 		}
 		
 		
-		entite = entite.substring(0, 1).toUpperCase()+entite.substring(1);
+		String entiteUp = entite.substring(0, 1).toUpperCase()+entite.substring(1);
 		try{
 			switch (action) {
 			
@@ -64,11 +63,11 @@ public class ActionEntite extends HttpServlet {
 				case "modifier":
 					request.setAttribute("entite", se.rechercherParId(id));
 					request.setAttribute("action", action);
-					target = "un"+entite+".jsp";
+					target = "un"+entiteUp+".jsp";
 					break;
 				case "supprimer":
 					try{
-						ServiceArticle.getInstance().supprimer(id);
+						se.supprimer(id);
 						request.setAttribute("success", "L'article a bien été supprimé.");
 					}catch (PersistenceException e) {
 						System.out.println(e.getMessage());

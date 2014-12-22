@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.afpa59.gc.services.commun.ServiceArticle;
 import com.afpa59.gc.services.commun.ServiceClient;
+import com.afpa59.gc.services.commun.ServiceCommande;
 import com.afpa59.gc.services.commun.ServiceEntite;
 
 /**
@@ -41,31 +42,33 @@ public class Dispatcher extends HttpServlet {
 			case "client":
 				se= ServiceClient.getInstance();
 				break;
+			case "commande":
+				se = ServiceCommande.getInstance();
 			default:
 				se = null;
 				break;
 		}
 		
-		entite = entite.substring(0, 1).toUpperCase()+entite.substring(1); //simule l'ucfirst
+		String entiteUp = entite.substring(0, 1).toUpperCase()+entite.substring(1); //simule l'ucfirst
 				
 		String target;
 		
 		switch (action) {
 			case "creer":
-				target = "un"+entite+".jsp";
+				target = "form"+entiteUp+".jsp";
 				break;
 			case "liste":
-				target = "liste"+entite+".jsp";
+				target = "liste"+entiteUp+".jsp";
 				request.setAttribute("entites", se.getEntites());
 				break;
 			case "visualiser":
-				target = "rechercher"+entite+".jsp";
+				target = "rechercher"+entiteUp+".jsp";
 				break;
 			case "modifier":
-				target = "rechercher"+entite+".jsp";
+				target = "rechercher"+entiteUp+".jsp";
 				break;
 			case "supprimer":
-				target = "rechercher"+entite+".jsp";
+				target = "rechercher"+entiteUp+".jsp";
 				break;
 			default:
 				target=entite+".jsp";

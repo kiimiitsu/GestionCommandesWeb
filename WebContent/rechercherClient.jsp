@@ -1,7 +1,7 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
 		<jsp:include page="subview/header.jsp"/>
-			<h1>Rechercher un article</h1>
+			<h1>Rechercher un client</h1>
 			<a href="client.jsp">Retour</a>
 
 			<!-- AFFICHER MESSAGE ERREUR -->	 

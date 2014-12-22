@@ -8,18 +8,18 @@
 			
 			<form action="ArticleForm?action=${requestScope.action}" method="post">
 			
-				<label for="id">Id (ne pas remplir) : </label>	
-				<input type="text" name="id" value="${article.id}" readonly="readonly"/>
+				<label for="id">Id : </label>	
+				<input type="text" name="id" value="${entite.id}" readonly="readonly"/>
 				<br/>
 							
 				<label for="libelle">Libelle : </label>
-				<input type="text" name="libelle" value="${article.libelle}${libelle}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
+				<input type="text" name="libelle" value="${entite.libelle}${libelle}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
 				
 				<span class="error"><c:out value="${errorLibelle}"/></span>
 				<br/>
 				
 				<label for="prix">Prix : </label>
-				<input type="text" name="prix" value="${article.prix}${prix}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if>  />
+				<input type="text" name="prix" value="${entite.prix}${prix}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if>  />
 				 
 				<span class="error"><c:out value="${errorPrix}"/></span>
 				<br/>

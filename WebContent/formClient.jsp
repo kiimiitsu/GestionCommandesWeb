@@ -8,7 +8,7 @@
 			
 			<form action="ClientForm?action=${requestScope.action}" method="post">
 			
-				<label for="id">Id (ne pas remplir) : </label>	
+				<label for="id">Id : </label>	
 				<input type="text" name="id" value="${entite.id}" readonly="readonly"/>
 				<br/>
 				

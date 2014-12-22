@@ -95,7 +95,7 @@ public class ArticleForm extends HttpServlet {
 			request.setAttribute("action", action);
 		}
 		request.setAttribute("action", action);
-		target = "unArticle.jsp";
+		target = "formArticle.jsp";
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(target);
