@@ -2,26 +2,27 @@
 
 		<jsp:include page="subview/header.jsp"/>
 		<div class="bodyWrapper">
-			<h1>Ajouter un article</h1>
+			<h2>Ajouter un article</h2>
 			
 			<a href="article.jsp">Retour</a>
+			<br/>
 			
-			<form action="ArticleForm?action=${requestScope.action}" method="post">
+			<form action="ArticleForm?action=${requestScope.action}" method="post" id="articleForm">
 			
 				<label for="id">Id : </label>	
 				<input type="text" name="id" value="${entite.id}" readonly="readonly"/>
 				<br/>
 							
 				<label for="libelle">Libelle : </label>
-				<input type="text" name="libelle" value="${entite.libelle}${libelle}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
+				<input type="text" autofocus="autofocus" name="libelle" value="${entite.libelle}${libelle}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
 				
-				<span class="error"><c:out value="${errorLibelle}"/></span>
+				<span class="error"><c:out value="${erreurLibelle}"/></span>
 				<br/>
 				
 				<label for="prix">Prix : </label>
 				<input type="text" name="prix" value="${entite.prix}${prix}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if>  />
 				 
-				<span class="error"><c:out value="${errorPrix}"/></span>
+				<span class="error"><c:out value="${erreurPrix}"/></span>
 				<br/>
 				
 				<c:choose>
@@ -38,6 +39,20 @@
 				
 				
 			</form>
+			<section id="image">
+				<c:choose>
+					<c:when test="${action=='visualiser'}">
+						<img alt="${entite.libelle}" src="pics/article/${entite.id}.jpg">
+					</c:when>
+					<c:when test="${action=='modifier'}">
+						
+					</c:when>
+					<c:otherwise>
+						
+					</c:otherwise>
+				</c:choose>
+			</section>
+			
 			
 		</div>
 <jsp:include page="subview/footer.jsp"/>

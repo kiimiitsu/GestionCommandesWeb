@@ -2,7 +2,7 @@
 
 		<jsp:include page="subview/header.jsp"/>
 		<div class="bodyWrapper">
-			<h1>Ajouter un client</h1>
+			<h2>Ajouter un client</h2>
 			
 			<a href="client.jsp">Retour</a>
 			
@@ -13,18 +13,18 @@
 				<br/>
 				
 				<label for="nom">Nom : </label>
-				<input type="text" name="nom" value="${entite.nom}${nom}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
-				<span class="error"><c:out value="${errorNom}"/></span>
+				<input type="text" autofocus="autofocus" name="nom" value="${entite.nom}${nom}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
+				<span class="error"><c:out value="${erreurNom}"/></span>
 				<br/>
 				
 				<label for="prenom">Prénom : </label>
 				<input type="text" name="prenom" value="${entite.prenom}${prenom}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
-				<span class="error"><c:out value="${errorPrenom}"/></span>
+				<span class="error"><c:out value="${erreurPrenom}"/></span>
 				<br/>
 								
 				<label for="adresse">Adresse : </label>
 				<input type="text" name="adresse" value="${entite.adresse}${adresse}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
-				<span class="error"><c:out value="${errorAdresse}"/></span>
+				<span class="error"><c:out value="${erreurAdresse}"/></span>
 				<br/>
 				
 				<c:choose>

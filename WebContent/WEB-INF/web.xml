@@ -79,4 +79,34 @@
     <servlet-name>CommandeForm</servlet-name>
     <url-pattern>/CommandeForm</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchCommandeForm</display-name>
+    <servlet-name>SearchCommandeForm</servlet-name>
+    <servlet-class>SearchCommandeForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchCommandeForm</servlet-name>
+    <url-pattern>/SearchCommandeForm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LigneCommandeForm</display-name>
+    <servlet-name>LigneCommandeForm</servlet-name>
+    <servlet-class>LigneCommandeForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LigneCommandeForm</servlet-name>
+    <url-pattern>/LigneCommandeForm</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchLigneCommandeForm</display-name>
+    <servlet-name>SearchLigneCommandeForm</servlet-name>
+    <servlet-class>SearchLigneCommandeForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchLigneCommandeForm</servlet-name>
+    <url-pattern>/SearchLigneCommandeForm</url-pattern>
+  </servlet-mapping>
 </web-app>

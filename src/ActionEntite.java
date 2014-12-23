@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.afpa59.gc.services.commun.ObjetInexistantException;
 import com.afpa59.gc.services.commun.ServiceArticle;
 import com.afpa59.gc.services.commun.ServiceClient;
+import com.afpa59.gc.services.commun.ServiceCommande;
 import com.afpa59.gc.services.commun.ServiceEntite;
 
 /**
@@ -49,6 +50,12 @@ public class ActionEntite extends HttpServlet {
 		case "client":
 			se = ServiceClient.getInstance();
 			break;
+		case "commande":
+			se = ServiceCommande.getInstance();
+			break;
+		case "ligneCommande":
+			se = (ServiceEntite) request.getSession().getAttribute("service");
+			break;
 		default:
 			se = null;
 			break;
@@ -63,15 +70,15 @@ public class ActionEntite extends HttpServlet {
 				case "modifier":
 					request.setAttribute("entite", se.rechercherParId(id));
 					request.setAttribute("action", action);
-					target = "un"+entiteUp+".jsp";
+					target = "form"+entiteUp+".jsp";
 					break;
 				case "supprimer":
 					try{
 						se.supprimer(id);
-						request.setAttribute("success", "L'article a bien été supprimé.");
+						request.setAttribute("success", "La référence a bien été supprimée.");
 					}catch (PersistenceException e) {
 						System.out.println(e.getMessage());
-						request.setAttribute("errors", "L'objet est référencé ailleurs, vous ne pouvez pas le supprimer.");
+						request.setAttribute("erreurs", "L'objet est référencé ailleurs, vous ne pouvez pas le supprimer.");
 					}
 					target = entite+".jsp";
 					break;

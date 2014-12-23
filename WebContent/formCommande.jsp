@@ -2,7 +2,7 @@
 
 		<jsp:include page="subview/header.jsp"/>
 		<div class="bodyWrapper">
-			<h1>Ajouter une commande</h1>
+			<h2>Ajouter une commande</h2>
 			
 			<a href="commande.jsp">Retour</a>
 			
@@ -12,24 +12,14 @@
 				<input type="text" name="id" value="${entite.id}" readonly="readonly"/>
 				<br/>
 				
-				<label for="nom">Nom : </label>
-				<input type="text" name="nom" value="${entite.nom}${nom}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
-				<span class="error"><c:out value="${errorNom}"/></span>
+				<label for="idClient">Id client : </label>
+				<input type="text" autofocus="autofocus" name="idClient" value="${entite.client.id}${idClient}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
+				<span class="error"><c:out value="${erreurClient}"/></span>
 				<br/>
-				
-				<label for="prenom">Prénom : </label>
-				<input type="text" name="prenom" value="${entite.prenom}${prenom}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
-				<span class="error"><c:out value="${errorPrenom}"/></span>
-				<br/>
-								
-				<label for="adresse">Adresse : </label>
-				<input type="text" name="adresse" value="${entite.adresse}${adresse}"  <c:if test="${action=='visualiser'}">readonly="readonly"</c:if> />
-				<span class="error"><c:out value="${errorAdresse}"/></span>
-				<br/>
-				
+
 				<c:choose>
 					<c:when test="${action=='visualiser'}">
-<!-- 							<input type="submit" value="Enregistrer"/> -->
+ 						<input type="submit" value="Détails"/>
 					</c:when>
 					<c:when test="${action=='modifier'}">
 						<input type="submit" value="Modifier"/>
@@ -38,8 +28,12 @@
 						<input type="submit" value="Enregistrer"/>
 					</c:otherwise>
 				</c:choose>
-				
 			</form>
+			
+			
+			
+			
+			
 			
 		</div>
 <jsp:include page="subview/footer.jsp"/>

@@ -7,11 +7,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.afpa59.gc.donnees.Entite;
 import com.afpa59.gc.services.commun.ServiceArticle;
 import com.afpa59.gc.services.commun.ServiceClient;
 import com.afpa59.gc.services.commun.ServiceCommande;
 import com.afpa59.gc.services.commun.ServiceEntite;
+import com.afpa59.gc.services.commun.ServiceLigneCommande;
 
 /**
  * Servlet implementation class Dispatcher
@@ -32,6 +35,8 @@ public class Dispatcher extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServiceEntite se;
 
+		HttpSession session = request.getSession();
+		
 		String action = request.getParameter("action");
 		String entite = request.getParameter("entite");
 		
@@ -44,6 +49,10 @@ public class Dispatcher extends HttpServlet {
 				break;
 			case "commande":
 				se = ServiceCommande.getInstance();
+				break;
+			case "ligneCommande":
+				se = (ServiceLigneCommande) session.getAttribute("service");
+				break;
 			default:
 				se = null;
 				break;
@@ -76,7 +85,7 @@ public class Dispatcher extends HttpServlet {
 		}
 		
 		request.setAttribute("action", action);
-		
+		session.setAttribute("service", se);
 		RequestDispatcher rd = request.getRequestDispatcher(target);
 		
 		rd.forward(request, response);

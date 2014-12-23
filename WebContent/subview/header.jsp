@@ -12,7 +12,7 @@
 
 		<header>
 			<div class="headerWrapper">
-				<h1>Gestion de commandes</h1>
+				<h1>Baby Physio</h1>
 			</div>
 			
 		</header>
@@ -36,8 +36,8 @@
 			</c:if>
 		
 		<!-- AFFICHER MESSAGE ERREUR -->	 
-			 <c:if test="${!empty errors}">
+			 <c:if test="${!empty erreurs}">
 				<div class="errors">
-					<c:out value="${errors}"/>
+					<c:out value="${erreurs}"/>
 				</div>
 			</c:if>

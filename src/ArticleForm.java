@@ -50,14 +50,14 @@ public class ArticleForm extends HttpServlet {
 		
 		if(libelle.equals("")){
 			errors++;
-			request.setAttribute("errorLibelle", "Le libellé ne doit pas être vide.");
+			request.setAttribute("erreurLibelle", "Le libellé ne doit pas être vide.");
 		}
 		if(prixStr.equals("")){
 			errors++;
-			request.setAttribute("errorPrix", "Le prix ne doit pas être vide.");
+			request.setAttribute("erreurPrix", "Le prix ne doit pas être vide.");
 		}else if(!prixStr.matches("^[-+]?\\d+(\\.\\d+)?$")){
 			errors++;
-			request.setAttribute("errorPrix", "Le prix doit être un chiffre.");
+			request.setAttribute("erreurPrix", "Le prix doit être un chiffre.");
 		}else{
 			prix = Float.parseFloat(prixStr);
 		}
@@ -85,7 +85,7 @@ public class ArticleForm extends HttpServlet {
 					}
 					break;
 				default:
-					request.setAttribute("errors", "Une erreur est survenue.");
+					request.setAttribute("erreurs", "Une erreur est survenue.");
 					break;
 			}
 			

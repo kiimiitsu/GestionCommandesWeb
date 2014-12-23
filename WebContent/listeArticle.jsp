@@ -2,7 +2,7 @@
 
 	<jsp:include page="subview/header.jsp"/>
 	
-		<h1>Liste des articles</h1>
+		<h2>Liste des articles</h2>
 		<a href="article.jsp">Retour</a>
 		<table class="liste">
 			<tr>

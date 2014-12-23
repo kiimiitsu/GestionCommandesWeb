@@ -52,15 +52,15 @@ public class ClientForm extends HttpServlet {
 		
 		if(nom.equals("")){
 			errors++;
-			request.setAttribute("errorNom", "Le nom ne doit pas être vide.");
+			request.setAttribute("erreurNom", "Le nom ne doit pas être vide.");
 		}
 		if(prenom.equals("")){
 			errors++;
-			request.setAttribute("errorPrenom", "Le prenom ne doit pas être vide.");
+			request.setAttribute("erreurPrenom", "Le prenom ne doit pas être vide.");
 		}
 		if(adresse.equals("")){
 			errors++;
-			request.setAttribute("errorAdresse", "Le prix ne doit pas être vide.");
+			request.setAttribute("erreurAdresse", "Le prix ne doit pas être vide.");
 		}
 		
 		
@@ -88,7 +88,7 @@ public class ClientForm extends HttpServlet {
 					}
 					break;
 				default:
-					request.setAttribute("errors", "Une erreur est survenue.");
+					request.setAttribute("erreurs", "Une erreur est survenue.");
 					break;
 			}
 			

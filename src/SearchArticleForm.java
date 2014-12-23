@@ -51,13 +51,13 @@ public class SearchArticleForm extends HttpServlet {
 		int id = 0;
 		if(libelle.trim().equals("") && idStr.trim().equals("")){
 			errors++;
-			request.setAttribute("errorChamps", "Vous devez remplir au moins un des deux champs.");
+			request.setAttribute("erreurChamps", "Vous devez remplir au moins un des deux champs.");
 		} else if(!libelle.trim().equals("") && !idStr.trim().equals("")){
 			errors++;
-			request.setAttribute("errorChamps", "Vous ne devez remplir qu'un seul champs.");
+			request.setAttribute("erreurChamps", "Vous ne devez remplir qu'un seul champs.");
 		}else if(!idStr.trim().equals("") && !idStr.matches("^[-+]?\\d+(\\.\\d+)?$")){
 			errors++;
-			request.setAttribute("errorId", "L'identifiant doit étre un chiffre.");
+			request.setAttribute("erreurId", "L'identifiant doit être un chiffre.");
 		}
 		if(errors==0){
 			try {

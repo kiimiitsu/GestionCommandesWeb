@@ -58,19 +58,32 @@ html{
 	margin: auto;
 }
 
-h1{
+h2{
 	margin-bottom:1em;
 	color : #5CE0C2;
 	font-size: 1.5em;
 	font-weight: bold;
 }
 
+@font-face {
+    font-family: "Calli";
+    src: url('Wolf in the City.ttf');
+}
+
 
 /*********************************************** HEADER **********************************************/
 header{
-	min-height: 100px;
+	min-height: 150px;
+	background-image: url("../pics/headerBG.jpg");
+	background-position: center center;
+	/*background-repeat: no-repeat;*/
 }
-
+header h1{
+	font-family: "Calli";
+	font-size: 7em;
+	color: #A545B0;
+	text-shadow: 3px 3px white;
+}
 
 /******************************************* NAV ********************************************************/
 nav {
@@ -171,4 +184,13 @@ label{
 
 .liste tr:hover{
 	background: #eee;
+}
+
+form#articleForm{
+	display: inline-block;
+	width: 50%;
+}
+section#image{
+	display: inline-block;
+	vertical-align: top;
 }
