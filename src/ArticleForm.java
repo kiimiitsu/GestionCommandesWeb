@@ -1,4 +1,3 @@
-package servlet;
 
 
 import java.io.IOException;
@@ -10,21 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.afpa59.gc.donnees.Article;
-import com.afpa59.gc.donnees.Client;
 import com.afpa59.gc.services.commun.ObjetInexistantException;
 import com.afpa59.gc.services.commun.ServiceArticle;
-import com.afpa59.gc.services.commun.ServiceClient;
 
 /**
  * Servlet implementation class ArticleForm
  */
-public class ClientForm extends HttpServlet {
+public class ArticleForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClientForm() {
+    public ArticleForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,47 +40,46 @@ public class ClientForm extends HttpServlet {
 		String action = request.getParameter("action");
 		String target;
 		
-		String nom = request.getParameter("nom").trim();
-		String prenom = request.getParameter("prenom").trim();
-		String adresse = request.getParameter("adresse").trim();
+		String libelle = request.getParameter("libelle").trim();
+		String prixStr = request.getParameter("prix").trim();
+		float prix = 0;
 		
 		String idStr = request.getParameter("id").trim();
 		
 		int errors= 0;
 		
-		if(nom.equals("")){
+		if(libelle.equals("")){
 			errors++;
-			request.setAttribute("erreurNom", "Le nom ne doit pas être vide.");
+			request.setAttribute("erreurLibelle", "Le libellé ne doit pas être vide.");
 		}
-		if(prenom.equals("")){
+		if(prixStr.equals("")){
 			errors++;
-			request.setAttribute("erreurPrenom", "Le prenom ne doit pas être vide.");
-		}
-		if(adresse.equals("")){
+			request.setAttribute("erreurPrix", "Le prix ne doit pas être vide.");
+		}else if(!prixStr.matches("^[-+]?\\d+(\\.\\d+)?$")){
 			errors++;
-			request.setAttribute("erreurAdresse", "Le prix ne doit pas être vide.");
+			request.setAttribute("erreurPrix", "Le prix doit être un chiffre.");
+		}else{
+			prix = Float.parseFloat(prixStr);
 		}
-		
 		
 		if(errors==0){
-			Client client = new Client();
-			client.setNom(nom);
-			client.setPrenom(prenom);
-			client.setAdresse(adresse);
+			Article article = new Article();
+			article.setLibelle(libelle);
+			article.setPrix(prix);
 			
-			ServiceClient sc = ServiceClient.getInstance();
+			ServiceArticle sa = ServiceArticle.getInstance();
 			
 			switch (action) {
 				case "creer":
-					sc.creer(client);
-					request.setAttribute("success", "Le client a bien été créé.");
+					sa.creer(article);
+					request.setAttribute("success", "L'article a bien été créé.");
 					break;
 				case "modifier":
 					int id = Integer.parseInt(idStr);
-					client.setId(id);
+					article.setId(id);
 					try {
-						sc.modifier(id, client);
-						request.setAttribute("success", "Le client a bien été modifié.");
+						sa.modifier(id, article);
+						request.setAttribute("success", "L'article a bien été modifié.");
 					} catch (ObjetInexistantException e) {
 						System.out.println(e.getMessage());
 					}
@@ -94,13 +90,12 @@ public class ClientForm extends HttpServlet {
 			}
 			
 		}else{
-			request.setAttribute("nom", nom);
-			request.setAttribute("prenom", prenom);
-			request.setAttribute("adresse", adresse);
+			request.setAttribute("libelle", libelle);
+			request.setAttribute("prix", prixStr);
 			request.setAttribute("action", action);
 		}
 		request.setAttribute("action", action);
-		target = "formClient.jsp";
+		target = "formArticle.jsp";
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(target);
