@@ -19,5 +19,17 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/GestionCommandesGit"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-api-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-el-api-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-embed-core-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-embed-jasper-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-embed-logging-juli-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-jasper-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-jasper-el-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-jsp-api-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-juli-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-servlet-api-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/tomcat-util-7.0.41.jar"/>
+	<classpathentry kind="lib" path="C:/mesjars/ecj-4.2.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

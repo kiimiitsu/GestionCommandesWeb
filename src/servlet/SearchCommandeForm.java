@@ -1,3 +1,4 @@
+package servlet;
 
 
 import java.io.IOException;
@@ -9,25 +10,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.afpa59.gc.donnees.Commande;
 import com.afpa59.gc.donnees.Entite;
-import com.afpa59.gc.donnees.LigneCommande;
 import com.afpa59.gc.services.commun.ObjetInexistantException;
 import com.afpa59.gc.services.commun.ServiceCommande;
-import com.afpa59.gc.services.commun.ServiceLigneCommande;
 
 /**
- * Servlet implementation class SearchLigneCommande
+ * Servlet implementation class SearchCommandeForm
  */
-public class SearchLigneCommandeForm extends HttpServlet {
+public class SearchCommandeForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchLigneCommandeForm() {
+    public SearchCommandeForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,19 +42,18 @@ public class SearchLigneCommandeForm extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int errors = 0;
-		HttpSession session = request.getSession();
-		ServiceLigneCommande service = (ServiceLigneCommande) session.getAttribute("service");
+		
 		String target = null;
 		
 		String idStr = request.getParameter("id").trim();
-		String nomArticle = request.getParameter("nomArticle").trim();
+		String nomClient = request.getParameter("nomClient").trim();
 		String action = request.getParameter("action");
 		
 		int id = 0;
-		if(nomArticle.trim().equals("") && idStr.trim().equals("")){
+		if(nomClient.trim().equals("") && idStr.trim().equals("")){
 			errors++;
 			request.setAttribute("erreurChamps", "Vous devez remplir au moins un des deux champs.");
-		} else if(!nomArticle.equals("") && !idStr.equals("")){
+		} else if(!nomClient.equals("") && !idStr.equals("")){
 			errors++;
 			request.setAttribute("erreurChamps", "Vous ne devez remplir qu'un seul champs.");
 		}else if(!idStr.trim().equals("") && !idStr.matches("^[-+]?\\d+(\\.\\d+)?$")){
@@ -65,30 +62,30 @@ public class SearchLigneCommandeForm extends HttpServlet {
 		}
 		if(errors==0){
 			try {
-				List<Entite> lignes = new ArrayList<Entite>();
+				List<Entite> commandes = new ArrayList<Entite>();
 				if (!idStr.equals("")){
 					
 					id = Integer.parseInt(idStr);
-					LigneCommande ligne = (LigneCommande) service.rechercherParId(id);
+					Commande commande = (Commande) ServiceCommande.getInstance().rechercherParId(id);
 					
-					lignes.add(ligne);
-					request.setAttribute("entites", lignes);
+					commandes.add(commande);
+					request.setAttribute("entites", commandes);
 					
-				}else if(!nomArticle.trim().equals("")){
-					lignes = service.rechercherParArticle(nomArticle);
-					request.setAttribute("entites", lignes);
+				}else if(!nomClient.trim().equals("")){
+					commandes = ServiceCommande.getInstance().rechercherParClient(nomClient);
+					request.setAttribute("entites", commandes);
 					
 				}
-				target = "listeLigneCommande.jsp";
+				target = "listeCommande.jsp";
 				request.setAttribute("action", action);
 			} catch (ObjetInexistantException e) {
-				target = "rechercherLigneCommande.jsp?action="+action;
+				target = "rechercherCommande.jsp?action="+action;
 				request.setAttribute("erreurs", "La recherche n'a retourné aucun résultat");
 			}
 			
 		}else{
-			target = "rechercherLigneCommande.jsp?action="+action;
-			request.setAttribute("nomArticle", nomArticle);
+			target = "rechercherCommande.jsp?action="+action;
+			request.setAttribute("nomClient", nomClient);
 			request.setAttribute("id", idStr);
 		}
 		
